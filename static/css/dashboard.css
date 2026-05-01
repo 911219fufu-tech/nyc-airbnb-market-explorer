@@ -99,28 +99,32 @@
 
 .filter-panel {
   grid-column: span 3;
+  grid-row: span 2;
 }
 
 .kpi-row {
   grid-column: span 9;
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+  align-self: start;
 }
 
 .kpi-card {
-  padding: 1.2rem;
+  padding: 0.95rem 1rem;
+  min-height: 92px;
 }
 
 .kpi-label {
   display: block;
   color: var(--muted);
   font-size: 0.82rem;
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.35rem;
 }
 
 .kpi-card strong {
-  font-size: 1.45rem;
+  font-size: 1.25rem;
+  line-height: 1.15;
 }
 
 .control-grid {
@@ -164,24 +168,23 @@
   min-height: 360px;
 }
 
-#map-chart,
+#map-chart {
+  min-height: 500px;
+}
+
 #timeseries-chart {
   min-height: 420px;
 }
 
 .chart-map {
-  grid-column: span 6;
+  grid-column: span 9;
 }
 
 .chart-timeseries {
-  grid-column: span 6;
-}
-
-.chart-room-type {
   grid-column: span 4;
 }
 
-.chart-property-type {
+.chart-room-type {
   grid-column: span 4;
 }
 
@@ -228,6 +231,7 @@
   .chart-panel,
   .narrative-panel {
     grid-column: auto;
+    grid-row: auto;
   }
 
   .kpi-row {

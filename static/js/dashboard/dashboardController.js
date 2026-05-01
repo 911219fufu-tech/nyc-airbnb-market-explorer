@@ -1,11 +1,11 @@
 import {
-  fetchCategorySummary,
   fetchKpis,
   fetchMapSummary,
   fetchMetadata,
   fetchScatter,
   fetchTimeseries,
 } from "../api/dashboardApi.js";
+import { fetchCategorySummary } from "../api/dashboardApi.js";
 import { renderCategoryBarChart } from "../charts/barChart.js";
 import { renderKpiCards } from "../charts/kpiCards.js";
 import { renderMapChart } from "../charts/mapChart.js";
@@ -18,12 +18,11 @@ import { renderMetadata } from "../ui/metadataPanel.js";
 import { clearStatus, showStatus } from "../ui/statusBanner.js";
 
 async function loadDashboardPayload(filters) {
-  const [kpis, timeseries, roomTypeSummary, propertyTypeSummary, mapSummary, scatter] =
+  const [kpis, timeseries, roomTypeSummary, mapSummary, scatter] =
     await Promise.all([
       fetchKpis(filters),
       fetchTimeseries(filters),
       fetchCategorySummary(filters, "room_type"),
-      fetchCategorySummary(filters, "property_type"),
       fetchMapSummary(filters),
       fetchScatter(filters),
     ]);
@@ -32,7 +31,6 @@ async function loadDashboardPayload(filters) {
     kpis,
     timeseries,
     roomTypeSummary,
-    propertyTypeSummary,
     mapSummary,
     scatter,
   };
@@ -42,7 +40,6 @@ function renderDashboard(filters, payload) {
   renderKpiCards(payload.kpis);
   renderTimeSeriesChart("timeseries-chart", payload.timeseries);
   renderCategoryBarChart("room-type-chart", payload.roomTypeSummary);
-  renderCategoryBarChart("property-type-chart", payload.propertyTypeSummary);
   renderMapChart("map-chart", payload.mapSummary);
   renderScatterChart("scatter-chart", payload.scatter);
   renderInsights(filters, payload);

@@ -19,7 +19,6 @@ export function renderInsights(filters, payload) {
 
   const topZip = getTopItem(payload.mapSummary.points, "metric_value");
   const topRoomType = getTopItem(payload.roomTypeSummary.items, "avg_revenue");
-  const topPropertyType = getTopItem(payload.propertyTypeSummary.items, "avg_revenue");
 
   const pointCount = payload.timeseries.points.length;
   const firstPoint = pointCount ? payload.timeseries.points[0] : null;
@@ -41,12 +40,6 @@ export function renderInsights(filters, payload) {
   if (topRoomType) {
     items.push(
       `${topRoomType.label} has the highest average revenue among room types at ${formatCurrency(topRoomType.avg_revenue)}.`
-    );
-  }
-
-  if (topPropertyType) {
-    items.push(
-      `${topPropertyType.label} leads property categories with average revenue of ${formatCurrency(topPropertyType.avg_revenue)}.`
     );
   }
 
