@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% from "components/macros.html" import chart_card %}
+
+{% block body %}
+<div class="page-shell">
+  <section id="status-banner" class="status-banner" aria-live="polite"></section>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Information Visualization Final Project</p>
+      <h1>NYC Airbnb Market Explorer</h1>
+      <p class="hero-text">
+        Explore how price, occupancy, and revenue vary across ZIP codes, room types,
+        property types, and time.
+      </p>
+      <div class="meta-strip">
+        <span id="meta-date-range" class="meta-pill">Date Range: -</span>
+        <span id="meta-listing-count" class="meta-pill">Listings: -</span>
+        <span id="meta-zip-count" class="meta-pill">ZIP Codes: -</span>
+      </div>
+    </div>
+    <div class="hero-note panel">
+      <h2>Analytical Focus</h2>
+      <ul class="note-list">
+        <li>Compare area-level market performance.</li>
+        <li>Track temporal change and seasonality.</li>
+        <li>Inspect category differences and outliers.</li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="dashboard-grid">
+    <aside class="panel filter-panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Filters</h2>
+          <p>Adjust the dataset slice and update every view together.</p>
+        </div>
+      </div>
+
+      <div class="control-grid">
+        <label class="control-field">
+          <span>Start Month</span>
+          <select id="start-month"></select>
+        </label>
+
+        <label class="control-field">
+          <span>End Month</span>
+          <select id="end-month"></select>
+        </label>
+
+        <label class="control-field">
+          <span>Room Type</span>
+          <select id="room-type" multiple></select>
+        </label>
+
+        <label class="control-field">
+          <span>Property Type</span>
+          <select id="property-type" multiple></select>
+        </label>
+
+        <label class="control-field">
+          <span>ZIP Code</span>
+          <select id="zip-code" multiple></select>
+        </label>
+
+        <label class="control-field">
+          <span>Metric</span>
+          <select id="metric">
+            <option value="revenue">Revenue</option>
+            <option value="avg_daily_rate">Daily Rate</option>
+            <option value="occupancy">Occupancy</option>
+            <option value="revpar">RevPAR</option>
+            <option value="star_rating">Star Rating</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="filter-actions">
+        <button id="reset-filters" class="button-secondary" type="button">Reset Filters</button>
+      </div>
+    </aside>
+
+    <section class="kpi-row">
+      <article class="panel kpi-card">
+        <span class="kpi-label">Unique Listings</span>
+        <strong id="kpi-listings">-</strong>
+      </article>
+      <article class="panel kpi-card">
+        <span class="kpi-label">Unique Hosts</span>
+        <strong id="kpi-hosts">-</strong>
+      </article>
+      <article class="panel kpi-card">
+        <span class="kpi-label">Avg Daily Rate</span>
+        <strong id="kpi-rate">-</strong>
+      </article>
+      <article class="panel kpi-card">
+        <span class="kpi-label">Avg Occupancy</span>
+        <strong id="kpi-occupancy">-</strong>
+      </article>
+      <article class="panel kpi-card">
+        <span class="kpi-label">Avg Revenue</span>
+        <strong id="kpi-revenue">-</strong>
+      </article>
+      <article class="panel kpi-card">
+        <span class="kpi-label">Avg RevPAR</span>
+        <strong id="kpi-revpar">-</strong>
+      </article>
+    </section>
+
+    {{ chart_card("Spatial Distribution", "Longitude and latitude show where high-performing ZIP areas cluster.", "map-chart", "chart-map") }}
+    {{ chart_card("Monthly Trend", "The time series summarizes the filtered market slice.", "timeseries-chart", "chart-timeseries") }}
+    {{ chart_card("Room Type Comparison", "Compare average revenue across room types.", "room-type-chart", "chart-room-type") }}
+    {{ chart_card("Property Type Comparison", "Compare average revenue across property categories.", "property-type-chart", "chart-property-type") }}
+    {{ chart_card("Listing-Level Relationship", "Latest filtered listing snapshot: price vs occupancy, scaled by revenue.", "scatter-chart", "chart-scatter") }}
+
+    <section class="panel narrative-panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Dynamic Insights</h2>
+          <p>Key takeaways update with the current filter state.</p>
+        </div>
+      </div>
+      <div class="insight-grid">
+        <article class="insight-block">
+          <h3>Current Summary</h3>
+          <p id="insight-summary" class="insight-copy">
+            Waiting for dashboard data.
+          </p>
+        </article>
+        <article class="insight-block">
+          <h3>What Stands Out</h3>
+          <ul id="insight-highlights" class="note-list">
+            <li>Insights will appear after the dashboard loads.</li>
+          </ul>
+        </article>
+        <article class="insight-block">
+          <h3>How To Read This View</h3>
+          <ul class="note-list">
+            <li>Start with the map to identify spatial concentration.</li>
+            <li>Use the time series to confirm whether a pattern is stable over time.</li>
+            <li>Compare room type and property type charts to separate market segments.</li>
+            <li>Use the scatter plot to spot high-price but low-occupancy outliers.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+{% endblock %}

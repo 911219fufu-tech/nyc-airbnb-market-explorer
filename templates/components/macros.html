@@ -1,0 +1,11 @@
+{% macro chart_card(title, subtitle, chart_id, extra_class="") -%}
+<section class="panel chart-panel {{ extra_class }}">
+  <div class="panel-heading">
+    <div>
+      <h2>{{ title }}</h2>
+      <p>{{ subtitle }}</p>
+    </div>
+  </div>
+  <div id="{{ chart_id }}" class="chart-surface"></div>
+</section>
+{%- endmacro %}
