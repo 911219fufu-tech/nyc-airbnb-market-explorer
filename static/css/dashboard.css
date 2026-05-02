@@ -88,7 +88,7 @@
   gap: 0.7rem;
   width: fit-content;
   max-width: 520px;
-  margin-top: rem;
+  margin-top: 6rem;
   padding: 0.9rem 1rem;
   background: rgba(255, 253, 248, 0.95);
   box-shadow: none;
@@ -176,6 +176,26 @@
   font-size: 0.78rem;
 }
 
+.filter-inline-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.text-action {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.text-action:hover {
+  text-decoration: underline;
+}
+
 .control-field select {
   width: 100%;
   min-height: 44px;
@@ -223,6 +243,8 @@
 
 .chart-panel {
   padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .chart-surface {
@@ -230,27 +252,37 @@
 }
 
 #map-chart {
-  min-height: 500px;
+  flex: 1;
+  min-height: 850px;
 }
 
 #timeseries-chart {
   min-height: 500px;
 }
 
+#room-type-chart,
+#scatter-chart {
+  min-height: 500px;
+}
+
 .chart-map {
   grid-column: span 9;
+  align-self: start;
 }
 
 .chart-timeseries {
   grid-column: span 4;
+  align-self: start;
 }
 
 .chart-room-type {
   grid-column: span 4;
+  align-self: start;
 }
 
 .chart-scatter {
   grid-column: span 4;
+  align-self: start;
 }
 
 .narrative-panel {

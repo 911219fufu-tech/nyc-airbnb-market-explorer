@@ -14,6 +14,7 @@ import { renderTimeSeriesChart } from "../charts/timeSeriesChart.js";
 import { createDashboardState } from "../state/dashboardState.js";
 import { initializeFilterControls } from "../ui/filterControls.js";
 import { renderInsights } from "../ui/insightPanel.js";
+import { renderMapSubtitle } from "../ui/mapPanel.js";
 import { renderMetadata } from "../ui/metadataPanel.js";
 import { clearStatus, showStatus } from "../ui/statusBanner.js";
 
@@ -41,6 +42,7 @@ function renderDashboard(filters, payload) {
   renderTimeSeriesChart("timeseries-chart", payload.timeseries);
   renderCategoryBarChart("room-type-chart", payload.roomTypeSummary);
   renderMapChart("map-chart", payload.mapSummary);
+  renderMapSubtitle(filters);
   renderScatterChart("scatter-chart", payload.scatter);
   renderInsights(filters, payload);
 }

@@ -40,12 +40,20 @@ function getCheckedValues(containerElement) {
   return Array.from(containerElement.querySelectorAll("input:checked")).map((input) => input.value);
 }
 
+function setCheckedState(containerElement, checked) {
+  Array.from(containerElement.querySelectorAll("input")).forEach((input) => {
+    input.checked = checked;
+  });
+}
+
 export function initializeFilterControls(metadata, state, onChange) {
   const startMonth = document.getElementById("start-month");
   const endMonth = document.getElementById("end-month");
   const roomType = document.getElementById("room-type");
   const propertyType = document.getElementById("property-type");
   const zipCode = document.getElementById("zip-code");
+  const zipSelectAll = document.getElementById("zip-select-all");
+  const zipClear = document.getElementById("zip-clear");
   const metric = document.getElementById("metric");
   const resetButton = document.getElementById("reset-filters");
 
@@ -64,12 +72,16 @@ export function initializeFilterControls(metadata, state, onChange) {
   });
 
   function syncState() {
+    const checkedZipCodes = getCheckedValues(zipCode);
+    const allZipCodesSelected =
+      checkedZipCodes.length > 0 && checkedZipCodes.length === metadata.zip_codes.length;
+
     state.setState({
       startMonth: startMonth.value,
       endMonth: endMonth.value,
       roomTypes: getCheckedValues(roomType),
       propertyTypes: getCheckedValues(propertyType),
-      zipCodes: getCheckedValues(zipCode),
+      zipCodes: allZipCodesSelected ? [] : checkedZipCodes,
       metric: metric.value,
     });
     onChange(state.getState());
@@ -81,6 +93,16 @@ export function initializeFilterControls(metadata, state, onChange) {
   propertyType.addEventListener("change", syncState);
   zipCode.addEventListener("change", syncState);
   metric.addEventListener("change", syncState);
+
+  zipSelectAll.addEventListener("click", () => {
+    setCheckedState(zipCode, true);
+    syncState();
+  });
+
+  zipClear.addEventListener("click", () => {
+    setCheckedState(zipCode, false);
+    syncState();
+  });
 
   resetButton.addEventListener("click", () => {
     startMonth.value = metadata.date_min.slice(0, 7);

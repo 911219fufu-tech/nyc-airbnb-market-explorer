@@ -64,6 +64,10 @@
         <label class="control-field">
           <span>ZIP Code</span>
           <small class="control-hint">Select one ZIP for single selection, or several for comparison.</small>
+          <div class="filter-inline-actions">
+            <button id="zip-select-all" class="text-action" type="button">Select All</button>
+            <button id="zip-clear" class="text-action" type="button">Clear</button>
+          </div>
           <div id="zip-code" class="checkbox-group checkbox-group-zip"></div>
         </label>
 
@@ -111,7 +115,7 @@
       </article>
     </section>
 
-    {{ chart_card("Spatial Distribution", "Longitude and latitude show where high-performing ZIP areas cluster.", "map-chart", "chart-map") }}
+    {{ chart_card("Spatial Distribution", "Showing the selected date range.", "map-chart", "chart-map", "map-subtitle") }}
     {{ chart_card("Monthly Trend", "The time series summarizes the filtered market slice.", "timeseries-chart", "chart-timeseries") }}
     {{ chart_card("Room Type Comparison", "Compare average revenue across room types.", "room-type-chart", "chart-room-type") }}
     {{ chart_card("Listing-Level Relationship", "Latest filtered listing snapshot: price vs occupancy, scaled by revenue.", "scatter-chart", "chart-scatter") }}

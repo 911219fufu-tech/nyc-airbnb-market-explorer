@@ -1,9 +1,9 @@
-{% macro chart_card(title, subtitle, chart_id, extra_class="") -%}
+{% macro chart_card(title, subtitle, chart_id, extra_class="", subtitle_id="") -%}
 <section class="panel chart-panel {{ extra_class }}">
   <div class="panel-heading">
     <div>
       <h2>{{ title }}</h2>
-      <p>{{ subtitle }}</p>
+      <p{% if subtitle_id %} id="{{ subtitle_id }}"{% endif %}>{{ subtitle }}</p>
     </div>
   </div>
   <div id="{{ chart_id }}" class="chart-surface"></div>

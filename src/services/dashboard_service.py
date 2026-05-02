@@ -152,6 +152,12 @@ def build_map_summary(filters: dict, metric: str) -> dict:
     metric = metric if metric in VALID_METRICS else "revenue"
     df = _apply_filters(filters)
 
+    if df.empty:
+        return {
+            "metric": metric,
+            "points": [],
+        }
+
     grouped = (
         df.groupby("zip_code", dropna=False)
         .agg(
@@ -167,6 +173,9 @@ def build_map_summary(filters: dict, metric: str) -> dict:
         .reset_index()
         .sort_values(MAP_METRIC_FIELD[metric], ascending=False)
     )
+
+    if metric == "revenue":
+        grouped = grouped[grouped["avg_revenue"] > 0].copy()
 
     points = []
     for row in grouped.itertuples(index=False):
