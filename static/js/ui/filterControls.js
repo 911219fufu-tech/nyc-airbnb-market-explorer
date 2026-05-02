@@ -16,8 +16,28 @@ function populateSelect(selectElement, values, { includeAll = false } = {}) {
   }
 }
 
-function getMultiSelectValues(selectElement) {
-  return Array.from(selectElement.selectedOptions).map((option) => option.value);
+function populateCheckboxGroup(containerElement, values, groupName) {
+  containerElement.innerHTML = "";
+
+  for (const value of values) {
+    const label = document.createElement("label");
+    label.className = "checkbox-option";
+
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.value = value;
+    input.name = groupName;
+
+    const text = document.createElement("span");
+    text.textContent = value;
+
+    label.append(input, text);
+    containerElement.append(label);
+  }
+}
+
+function getCheckedValues(containerElement) {
+  return Array.from(containerElement.querySelectorAll("input:checked")).map((input) => input.value);
 }
 
 export function initializeFilterControls(metadata, state, onChange) {
@@ -31,9 +51,9 @@ export function initializeFilterControls(metadata, state, onChange) {
 
   populateSelect(startMonth, metadata.months, { includeAll: true });
   populateSelect(endMonth, metadata.months, { includeAll: true });
-  populateSelect(roomType, metadata.room_types);
-  populateSelect(propertyType, metadata.property_types);
-  populateSelect(zipCode, metadata.zip_codes);
+  populateCheckboxGroup(roomType, metadata.room_types, "room-type");
+  populateCheckboxGroup(propertyType, metadata.property_types, "property-type");
+  populateCheckboxGroup(zipCode, metadata.zip_codes, "zip-code");
 
   startMonth.value = metadata.date_min.slice(0, 7);
   endMonth.value = metadata.date_max.slice(0, 7);
@@ -47,9 +67,9 @@ export function initializeFilterControls(metadata, state, onChange) {
     state.setState({
       startMonth: startMonth.value,
       endMonth: endMonth.value,
-      roomTypes: getMultiSelectValues(roomType),
-      propertyTypes: getMultiSelectValues(propertyType),
-      zipCodes: getMultiSelectValues(zipCode),
+      roomTypes: getCheckedValues(roomType),
+      propertyTypes: getCheckedValues(propertyType),
+      zipCodes: getCheckedValues(zipCode),
       metric: metric.value,
     });
     onChange(state.getState());
@@ -66,9 +86,9 @@ export function initializeFilterControls(metadata, state, onChange) {
     startMonth.value = metadata.date_min.slice(0, 7);
     endMonth.value = metadata.date_max.slice(0, 7);
     metric.value = "revenue";
-    for (const select of [roomType, propertyType, zipCode]) {
-      Array.from(select.options).forEach((option) => {
-        option.selected = false;
+    for (const group of [roomType, propertyType, zipCode]) {
+      Array.from(group.querySelectorAll("input")).forEach((input) => {
+        input.checked = false;
       });
     }
 

@@ -36,6 +36,7 @@ Key changes:
 
 - parses `month_date`
 - normalizes `neighborhood` into `zip_code`
+- removes rows where `zip_code` cannot be resolved
 - normalizes boolean fields
 - keeps only the fields needed for the project
 

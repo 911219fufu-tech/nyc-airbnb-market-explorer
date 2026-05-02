@@ -51,6 +51,11 @@ export async function initializeDashboard() {
     return;
   }
 
+  if (!window.L) {
+    showStatus("Leaflet failed to load in the browser. Refresh once and check your internet connection.", "error");
+    return;
+  }
+
   showStatus("Loading dashboard data...");
 
   const metadata = await fetchMetadata();

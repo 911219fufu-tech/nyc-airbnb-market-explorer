@@ -87,6 +87,7 @@ def load_and_clean() -> pd.DataFrame:
         df.loc[df[column] == "", column] = "Unknown"
 
     df["zip_code"] = df["neighborhood"].apply(normalize_zip)
+    df = df[df["zip_code"] != "Unknown"].copy()
     df["active"] = df["active"].apply(normalize_bool)
     df["superhost"] = df["superhost"].apply(normalize_bool)
     df["month"] = df["month_date"].dt.strftime("%Y-%m")

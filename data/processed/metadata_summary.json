@@ -1,12 +1,12 @@
 {
   "dataset_name": "NYC Airbnb listings monthly",
   "source_file": "data/raw/listings_monthly.csv",
-  "row_count": 35410,
-  "listing_count": 1000,
-  "host_count": 892,
+  "row_count": 35157,
+  "listing_count": 975,
+  "host_count": 872,
   "date_min": "2021-03-01",
   "date_max": "2026-02-01",
-  "zip_code_count": 162,
+  "zip_code_count": 161,
   "room_types": [
     "entire_home",
     "hotel_room",
@@ -27,12 +27,12 @@
     "star_rating"
   ],
   "missing_rate": {
-    "star_rating": 0.161,
-    "bedrooms": 0.2418,
-    "guests": 0.2092,
-    "superhost": 0.0241,
-    "booking_lead_time_avg": 0.8978,
-    "length_of_stay_avg": 0.8978,
-    "booked_rate_avg": 0.5219
+    "star_rating": 0.1592,
+    "bedrooms": 0.2425,
+    "guests": 0.2099,
+    "superhost": 0.0243,
+    "booking_lead_time_avg": 0.8995,
+    "length_of_stay_avg": 0.8995,
+    "booked_rate_avg": 0.5213
   }
 }

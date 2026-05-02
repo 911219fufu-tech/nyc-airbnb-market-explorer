@@ -63,7 +63,13 @@ def build_filter_metadata() -> dict:
     df = repository.get_clean_listings()
     metadata = repository.get_metadata()
 
-    zip_codes = sorted(df["zip_code"].dropna().astype(str).unique().tolist())
+    zip_codes = sorted(
+        df.loc[df["zip_code"].astype(str) != "Unknown", "zip_code"]
+        .dropna()
+        .astype(str)
+        .unique()
+        .tolist()
+    )
     months = sorted(df["month"].dropna().unique().tolist())
 
     return {

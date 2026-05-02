@@ -20,11 +20,11 @@
       </div>
     </div>
     <div class="hero-note panel">
-      <h2>Analytical Focus</h2>
-      <ul class="note-list">
-        <li>Compare area-level market performance.</li>
-        <li>Track temporal change and seasonality.</li>
-        <li>Inspect category differences and outliers.</li>
+      <span class="hero-note-label">Analytical Focus</span>
+      <ul class="hero-note-list">
+        <li>Compare area-level market performance using price, occupancy, and revenue patterns.</li>
+        <li>Track temporal change and seasonality across the full monthly time range.</li>
+        <li>Inspect category differences and outliers at the listing and room-type level.</li>
       </ul>
     </div>
   </header>
@@ -51,17 +51,20 @@
 
         <label class="control-field">
           <span>Room Type</span>
-          <select id="room-type" multiple></select>
+          <small class="control-hint">Select one or more options.</small>
+          <div id="room-type" class="checkbox-group"></div>
         </label>
 
         <label class="control-field">
           <span>Property Type</span>
-          <select id="property-type" multiple></select>
+          <small class="control-hint">Select one or more options.</small>
+          <div id="property-type" class="checkbox-group"></div>
         </label>
 
         <label class="control-field">
           <span>ZIP Code</span>
-          <select id="zip-code" multiple></select>
+          <small class="control-hint">Select one ZIP for single selection, or several for comparison.</small>
+          <div id="zip-code" class="checkbox-group checkbox-group-zip"></div>
         </label>
 
         <label class="control-field">
