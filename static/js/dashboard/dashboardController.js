@@ -40,7 +40,7 @@ async function loadDashboardPayload(filters) {
 function renderDashboard(filters, payload) {
   renderKpiCards(payload.kpis);
   renderTimeSeriesChart("timeseries-chart", payload.timeseries);
-  renderCategoryBarChart("room-type-chart", payload.roomTypeSummary);
+  renderCategoryBarChart("room-type-chart", payload.roomTypeSummary, filters.metric);
   renderMapChart("map-chart", payload.mapSummary);
   renderMapSubtitle(filters);
   renderScatterChart("scatter-chart", payload.scatter);
