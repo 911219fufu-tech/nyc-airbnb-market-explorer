@@ -1,3 +1,6 @@
 .DS_Store
 __pycache__/
 *.pyc
+
+# Large local submission assets
+docs/submission/*.MOV
