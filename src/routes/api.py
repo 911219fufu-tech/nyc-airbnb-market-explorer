@@ -52,4 +52,5 @@ def map_data():
 
 @api_bp.get("/scatter")
 def scatter_data():
-    return jsonify(build_scatter_points(_collect_filters()))
+    metric = request.args.get("metric", "revenue")
+    return jsonify(build_scatter_points(_collect_filters(), metric))

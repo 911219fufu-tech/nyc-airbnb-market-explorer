@@ -202,7 +202,8 @@ def build_map_summary(filters: dict, metric: str) -> dict:
     }
 
 
-def build_scatter_points(filters: dict, limit: int = 800) -> dict:
+def build_scatter_points(filters: dict, metric: str = "revenue", limit: int = 800) -> dict:
+    metric = metric if metric in VALID_METRICS else "revenue"
     df = _apply_filters(filters)
     latest_per_listing = (
         df.sort_values(["listing_id", "month_date"])
@@ -227,7 +228,8 @@ def build_scatter_points(filters: dict, limit: int = 800) -> dict:
                 "revenue": _safe_round(row.revenue),
                 "revpar": _safe_round(row.revpar),
                 "star_rating": _safe_round(row.star_rating),
+                "metric_value": _safe_round(getattr(row, metric, None)),
             }
         )
 
-    return {"points": points}
+    return {"metric": metric, "points": points}
