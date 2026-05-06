@@ -59,13 +59,13 @@ This project turns those raw records into an interactive visual analytics websit
 
 ### 3. Room Type Comparison
 
-- compares average revenue across room types
-- useful for segment-level comparison
+- compares the selected metric across room types
+- useful for segment-level comparison under different performance measures
 
 ### 4. Listing-Level Relationship
 
 - scatter plot of average daily rate vs occupancy
-- marker size and color provide additional revenue context
+- marker size and color reflect the currently selected metric
 
 ## Tech Stack
 
